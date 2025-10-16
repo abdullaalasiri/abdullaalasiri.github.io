@@ -18,6 +18,21 @@
             padding: 20px;
         }
 
+        .header-logo {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .header-logo img {
+            max-width: 100%;
+            height: auto;
+            max-height: 150px;
+        }
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -259,6 +274,54 @@
 
         .add-student-btn:hover {
             background: #e0a800;
+        }
+
+        .mark-all-present-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: 600;
+        }
+
+        .mark-all-present-btn:hover {
+            background: #218838;
+        }
+
+        .mark-all-absent-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: 600;
+        }
+
+        .mark-all-absent-btn:hover {
+            background: #c82333;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            align-items: center;
+        }
+
+        .quick-actions-label {
+            font-weight: 600;
+            color: #555;
+            margin-right: 10px;
         }
 
         .button-group {
@@ -514,13 +577,326 @@
         .success-message.show {
             display: block;
         }
+
+        .dashboard-btn {
+            background: #6f42c1;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+            font-weight: 600;
+        }
+
+        .dashboard-btn:hover {
+            background: #5a32a3;
+        }
+
+        .dashboard-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .dashboard-header {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dashboard-close {
+            cursor: pointer;
+            color: #666;
+            font-size: 28px;
+            font-weight: normal;
+        }
+
+        .dashboard-close:hover {
+            color: #333;
+        }
+
+        .period-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .period-summary-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+        }
+
+        .period-summary-title {
+            font-weight: 600;
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .period-summary-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+
+        .period-summary-stats span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .stat-present {
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        .stat-absent {
+            color: #dc3545;
+            font-weight: 600;
+        }
+
+        .stat-late {
+            color: #ffc107;
+            font-weight: 600;
+        }
+
+        .overall-stats {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .overall-stats-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .overall-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .overall-stat-item {
+            text-align: center;
+        }
+
+        .overall-stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            display: block;
+        }
+
+        .overall-stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .student-attendance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .student-attendance-table th {
+            background: #f8f9fa;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+            border-bottom: 2px solid #dee2e6;
+            font-size: 14px;
+        }
+
+        .student-attendance-table td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+            font-size: 14px;
+        }
+
+        .student-attendance-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .attendance-indicator {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            text-align: center;
+            line-height: 30px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .indicator-present {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .indicator-absent {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .indicator-late {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .dashboard-section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin: 25px 0 15px 0;
+        }
+
+        #dashboardView {
+            display: none;
+        }
+
+        #dashboardView.show {
+            display: block;
+        }
+
+        #mainView.hide {
+            display: none;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .header-logo,
+            .class-tabs,
+            .period-tabs,
+            .controls,
+            .quick-actions,
+            .button-group,
+            .no-print {
+                display: none !important;
+            }
+
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+
+            .print-header {
+                display: block !important;
+                margin-bottom: 20px;
+                border-bottom: 2px solid #333;
+                padding-bottom: 10px;
+            }
+
+            .print-info {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 10px;
+                font-size: 14px;
+            }
+
+            table {
+                page-break-inside: auto;
+            }
+
+            tr {
+                page-break-inside: avoid;
+                page-break-after: auto;
+            }
+
+            .summary {
+                border: 2px solid #333;
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+
+            .summary-card {
+                border: 1px solid #666;
+            }
+
+            .status-btn {
+                border: 1px solid #333 !important;
+            }
+
+            .delete-btn {
+                display: none !important;
+            }
+
+            .actions-cell {
+                display: none !important;
+            }
+
+            th:last-child {
+                display: none !important;
+            }
+        }
+
+        .print-header {
+            display: none;
+        }
+
+        .print-btn {
+            background: #17a2b8;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+        }
+
+        .print-btn:hover {
+            background: #138496;
+        }
     </style>
 </head>
 <body>
+    <div class="header-logo">
+        <img src="https://www.gulfeducationinsider.com/wp-content/uploads/2023/10/cropped-header-transparent.png" alt="Creativity Private School">
+    </div>
+
+    <!-- Dashboard View -->
+    <div id="dashboardView"></div>
+    
+    <!-- Main Attendance View -->
+    <div id="mainView">
     <div class="container">
         <h1>📚 School Attendance Tracker</h1>
         
         <div id="successMessage" class="success-message"></div>
+
+        <!-- Print Header (hidden on screen, visible when printing) -->
+        <div class="print-header">
+            <div style="text-align: center; margin-bottom: 15px;">
+                <h2>Creativity Private School</h2>
+                <h3>Attendance Report</h3>
+            </div>
+            <div class="print-info">
+                <div><strong>Class:</strong> <span id="printClassName"></span></div>
+                <div><strong>Period:</strong> <span id="printPeriodName"></span></div>
+                <div><strong>Date:</strong> <span id="printDate"></span></div>
+            </div>
+        </div>
         
         <div class="class-tabs" id="classTabs"></div>
         
@@ -554,8 +930,16 @@
             </div>
         </div>
 
+        <div class="quick-actions">
+            <span class="quick-actions-label">Quick Actions:</span>
+            <button class="mark-all-present-btn" onclick="markAllPresent()">✓ Mark All Present</button>
+            <button class="mark-all-absent-btn" onclick="markAllAbsent()">✗ Mark All Absent</button>
+        </div>
+
         <div class="button-group">
             <button class="add-student-btn" onclick="openAddStudentModal()">➕ Add Student</button>
+            <button class="dashboard-btn" onclick="showDashboard()">📊 View Dashboard</button>
+            <button class="print-btn" onclick="printAttendance()">🖨️ Print</button>
             <button class="save-btn" onclick="saveData()">💾 Save Data</button>
             <button class="load-btn" onclick="document.getElementById('loadFileInput').click()">📂 Load Data</button>
             <button class="download-btn" onclick="downloadReport()">📥 Download Report</button>
@@ -1104,6 +1488,213 @@
             setTimeout(() => {
                 msgDiv.classList.remove('show');
             }, 3000);
+        }
+
+        // Mark All Functions
+        function markAllPresent() {
+            if (!confirm('Mark all students as PRESENT for this period?')) {
+                return;
+            }
+
+            const currentPeriod = getCurrentPeriod();
+            currentPeriod.students.forEach(student => {
+                student.status = 'present';
+                student.reason = '';
+            });
+
+            renderTable();
+            showSuccessMessage('All students marked as present!');
+        }
+
+        function markAllAbsent() {
+            if (!confirm('Mark all students as ABSENT for this period? You can add individual absence reasons later.')) {
+                return;
+            }
+
+            const currentPeriod = getCurrentPeriod();
+            currentPeriod.students.forEach(student => {
+                student.status = 'absent';
+                student.reason = '';
+            });
+
+            renderTable();
+            showSuccessMessage('All students marked as absent. Click on individual students to add absence reasons.');
+        }
+
+        // Dashboard Functions
+        function showDashboard() {
+            const currentClass = getCurrentClass();
+            const date = document.getElementById('date').value;
+            
+            let dashboardHTML = `
+                <div class="dashboard-container">
+                    <div class="dashboard-header">
+                        <span>📊 ${currentClass.name} - Daily Attendance Dashboard</span>
+                        <span class="dashboard-close" onclick="hideDashboard()">✕</span>
+                    </div>
+                    <div style="margin-bottom: 20px; color: #666;">Date: ${date}</div>
+                    
+                    ${generateOverallStats(currentClass)}
+                    ${generatePeriodSummaries(currentClass)}
+                    ${generateStudentAttendanceTable(currentClass)}
+                </div>
+            `;
+            
+            document.getElementById('dashboardView').innerHTML = dashboardHTML;
+            document.getElementById('dashboardView').classList.add('show');
+            document.getElementById('mainView').classList.add('hide');
+        }
+
+        function hideDashboard() {
+            document.getElementById('dashboardView').classList.remove('show');
+            document.getElementById('mainView').classList.remove('hide');
+        }
+
+        function generateOverallStats(currentClass) {
+            let totalPresent = 0;
+            let totalAbsent = 0;
+            let totalLate = 0;
+            let totalSlots = 0;
+
+            currentClass.periods.forEach(period => {
+                totalPresent += period.students.filter(s => s.status === 'present').length;
+                totalAbsent += period.students.filter(s => s.status === 'absent').length;
+                totalLate += period.students.filter(s => s.status === 'late').length;
+                totalSlots += period.students.length;
+            });
+
+            const attendanceRate = ((totalPresent / totalSlots) * 100).toFixed(1);
+
+            return `
+                <div class="overall-stats">
+                    <div class="overall-stats-title">Overall Statistics (All 8 Periods)</div>
+                    <div class="overall-stats-grid">
+                        <div class="overall-stat-item">
+                            <span class="overall-stat-number">${totalPresent}</span>
+                            <span class="overall-stat-label">Total Present</span>
+                        </div>
+                        <div class="overall-stat-item">
+                            <span class="overall-stat-number">${totalAbsent}</span>
+                            <span class="overall-stat-label">Total Absent</span>
+                        </div>
+                        <div class="overall-stat-item">
+                            <span class="overall-stat-number">${totalLate}</span>
+                            <span class="overall-stat-label">Total Late</span>
+                        </div>
+                        <div class="overall-stat-item">
+                            <span class="overall-stat-number">${attendanceRate}%</span>
+                            <span class="overall-stat-label">Attendance Rate</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function generatePeriodSummaries(currentClass) {
+            let html = '<div class="dashboard-section-title">Period-by-Period Summary</div>';
+            html += '<div class="period-summary-grid">';
+
+            currentClass.periods.forEach(period => {
+                const present = period.students.filter(s => s.status === 'present').length;
+                const absent = period.students.filter(s => s.status === 'absent').length;
+                const late = period.students.filter(s => s.status === 'late').length;
+
+                html += `
+                    <div class="period-summary-card">
+                        <div class="period-summary-title">${period.name} (${period.time})</div>
+                        <div class="period-summary-stats">
+                            <span class="stat-present">✓ ${present}</span>
+                            <span class="stat-absent">✗ ${absent}</span>
+                            <span class="stat-late">🕐 ${late}</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += '</div>';
+            return html;
+        }
+
+        function generateStudentAttendanceTable(currentClass) {
+            // Get all unique students sorted alphabetically
+            const studentsMap = new Map();
+            
+            currentClass.periods[0].students.forEach(student => {
+                studentsMap.set(student.id, {
+                    id: student.id,
+                    name: student.name,
+                    periods: []
+                });
+            });
+
+            // Collect attendance for each period
+            currentClass.periods.forEach(period => {
+                period.students.forEach(student => {
+                    if (studentsMap.has(student.id)) {
+                        studentsMap.get(student.id).periods.push(student.status);
+                    }
+                });
+            });
+
+            const students = Array.from(studentsMap.values()).sort((a, b) => a.name.localeCompare(b.name));
+
+            let html = '<div class="dashboard-section-title">Individual Student Attendance</div>';
+            html += '<table class="student-attendance-table">';
+            html += '<thead><tr>';
+            html += '<th>Roll</th><th>Student Name</th>';
+            
+            for (let i = 1; i <= 8; i++) {
+                html += `<th style="text-align: center;">P${i}</th>`;
+            }
+            html += '<th style="text-align: center;">Summary</th>';
+            html += '</tr></thead><tbody>';
+
+            students.forEach((student, index) => {
+                const present = student.periods.filter(s => s === 'present').length;
+                const absent = student.periods.filter(s => s === 'absent').length;
+                const late = student.periods.filter(s => s === 'late').length;
+
+                html += '<tr>';
+                html += `<td><strong>${index + 1}</strong></td>`;
+                html += `<td>${student.name}</td>`;
+
+                student.periods.forEach(status => {
+                    let indicator = '';
+                    if (status === 'present') {
+                        indicator = '<span class="attendance-indicator indicator-present">✓</span>';
+                    } else if (status === 'absent') {
+                        indicator = '<span class="attendance-indicator indicator-absent">✗</span>';
+                    } else if (status === 'late') {
+                        indicator = '<span class="attendance-indicator indicator-late">🕐</span>';
+                    }
+                    html += `<td style="text-align: center;">${indicator}</td>`;
+                });
+
+                html += `<td style="text-align: center; font-size: 12px;">
+                    <span class="stat-present">${present}P</span> / 
+                    <span class="stat-absent">${absent}A</span> / 
+                    <span class="stat-late">${late}L</span>
+                </td>`;
+                html += '</tr>';
+            });
+
+            html += '</tbody></table>';
+            return html;
+        }
+
+        // Print Function
+        function printAttendance() {
+            const currentClass = getCurrentClass();
+            const currentPeriod = getCurrentPeriod();
+            const date = document.getElementById('date').value;
+
+            // Update print header with current info
+            document.getElementById('printClassName').textContent = currentClass.name;
+            document.getElementById('printPeriodName').textContent = `${currentPeriod.name} (${currentPeriod.time})`;
+            document.getElementById('printDate').textContent = date;
+
+            // Trigger print dialog
+            window.print();
         }
 
         // Initial render
