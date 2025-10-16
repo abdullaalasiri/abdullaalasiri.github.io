@@ -1,899 +1,1115 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>John Doe - CV</title>
+    <title>School Attendance Tracker</title>
     <style>
-        /* CSS Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* CSS Variables for Light Mode (Default) */
-        :root {
-            --bg-gradient-start: #f5f7fa;
-            --bg-gradient-end: #c3cfe2;
-            --container-bg: #ffffff;
-            --text-primary: #333333;
-            --text-secondary: #555555;
-            --heading-color: #667eea;
-            --border-color: #e0e0e0;
-            --section-bg: #fafbfc;
-            --footer-bg: #2d3748;
-            --footer-text: #ffffff;
-            --shadow: rgba(0, 0, 0, 0.1);
-        }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-primary);
-            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
-            min-height: 100vh;
-            transition: background 0.3s ease, color 0.3s ease;
-        }
-
-        /* Dark Mode Styles - Activated when checkbox is checked */
-        #dark-mode-toggle:checked~.page-wrapper {
-            --bg-gradient-start: #1a202c;
-            --bg-gradient-end: #2d3748;
-            --container-bg: #2d3748;
-            --text-primary: #e2e8f0;
-            --text-secondary: #cbd5e0;
-            --heading-color: #9f7aea;
-            --border-color: #4a5568;
-            --section-bg: #1a202c;
-            --footer-bg: #1a202c;
-            --footer-text: #e2e8f0;
-            --shadow: rgba(0, 0, 0, 0.3);
-        }
-
-        /* Hide the actual checkbox */
-        #dark-mode-toggle {
-            display: none;
-        }
-
-        /* Dark Mode Toggle Button */
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-
-        .toggle-label {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 60px;
-            height: 30px;
-            background: #cbd5e0;
-            border-radius: 30px;
-            padding: 5px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            box-shadow: 0 2px 8px var(--shadow);
-        }
-
-        .toggle-label:hover {
-            background: #a0aec0;
-        }
-
-        /* Toggle Button Circle */
-        .toggle-label::before {
-            content: '☀️';
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 22px;
-            height: 22px;
-            background: white;
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-            font-size: 14px;
-        }
-
-        /* When dark mode is active */
-        #dark-mode-toggle:checked~.page-wrapper .toggle-label {
-            background: #4a5568;
-        }
-
-        #dark-mode-toggle:checked~.page-wrapper .toggle-label::before {
-            content: '🌙';
-            transform: translateX(30px);
-        }
-
-        /* Page wrapper to apply dark mode */
-        .page-wrapper {
-            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
-            min-height: 100vh;
-            transition: background 0.3s ease;
-        }
-
-        /* Main Container */
-        .container {
-            max-width: 900px;
-            margin: 2rem auto;
-            background: var(--container-bg);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px var(--shadow);
-            overflow: hidden;
-            transition: background 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        /* Header Section with Profile */
-        header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 3rem 2rem;
-            text-align: center;
+            min-height: 100vh;
+            padding: 20px;
         }
 
-        .profile-image {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 5px solid white;
-            margin-bottom: 1.5rem;
-            object-fit: cover;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            padding: 30px;
         }
 
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 32px;
         }
 
-        .title {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            font-weight: 300;
-        }
-
-        /* Professional Description Section */
-        .description {
-            padding: 2.5rem 2rem;
-            border-bottom: 1px solid var(--border-color);
-            transition: border-color 0.3s ease;
-        }
-
-        .description h2 {
-            color: var(--heading-color);
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
-            transition: color 0.3s ease;
-        }
-
-        .description p {
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-            line-height: 1.8;
-            transition: color 0.3s ease;
-        }
-
-        /* Skills Section */
-        .skills {
-            padding: 2.5rem 2rem;
-            background: var(--section-bg);
-            transition: background 0.3s ease;
-        }
-
-        .skills h2 {
-            color: var(--heading-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-            transition: color 0.3s ease;
-        }
-
-        .skills-category {
-            margin-bottom: 2rem;
-        }
-
-        .skills-category:last-child {
-            margin-bottom: 0;
-        }
-
-        .skills-category h3 {
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        /* Skill Badges */
-        .skill-badges {
+        .class-tabs {
             display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
             flex-wrap: wrap;
-            gap: 0.75rem;
         }
 
-        .badge {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .badge:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-        }
-
-        /* Soft skills use a different color scheme */
-        .soft-skills .badge {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
-
-        .soft-skills .badge:hover {
-            box-shadow: 0 4px 12px rgba(245, 87, 108, 0.3);
-        }
-
-        /* Projects Section */
-        .projects {
-            padding: 2.5rem 2rem;
-            border-top: 1px solid var(--border-color);
-            transition: border-color 0.3s ease;
-        }
-
-        .projects h2 {
-            color: var(--heading-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-            transition: color 0.3s ease;
-        }
-
-        .projects-intro {
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            font-size: 1.05rem;
-        }
-
-        /* Skill Project Container */
-        .skill-project-item {
-            margin-bottom: 1rem;
-        }
-
-        /* Hide all checkboxes */
-        .skill-checkbox {
-            display: none;
-        }
-
-        /* Skill Button (clickable) */
-        .skill-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 25px;
-            font-size: 1rem;
-            font-weight: 500;
+        .class-tab {
+            padding: 12px 24px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 8px;
             cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            user-select: none;
-            position: relative;
-        }
-
-        .skill-button::after {
-            content: ' ▼';
-            font-size: 0.8rem;
-            transition: transform 0.3s ease;
-            display: inline-block;
-        }
-
-        .skill-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-        }
-
-        /* When checkbox is checked, rotate arrow */
-        .skill-checkbox:checked+.skill-button::after {
-            transform: rotate(180deg);
-        }
-
-        /* Projects dropdown container */
-        .project-dropdown {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease, margin-top 0.4s ease;
-            margin-top: 0;
-        }
-
-        /* When checkbox is checked, expand dropdown */
-        .skill-checkbox:checked~.project-dropdown {
-            max-height: 800px;
-            margin-top: 1rem;
-        }
-
-        /* Individual project cards */
-        .project-card {
-            background: var(--section-bg);
-            border-left: 4px solid #667eea;
-            padding: 1.2rem;
-            margin-bottom: 1rem;
-            border-radius: 8px;
-            transition: background 0.3s ease, transform 0.2s ease;
-        }
-
-        .project-card:hover {
-            transform: translateX(5px);
-        }
-
-        .project-card:last-child {
-            margin-bottom: 0;
-        }
-
-        .project-title {
-            color: var(--heading-color);
-            font-size: 1.2rem;
+            transition: all 0.3s;
             font-weight: 600;
-            margin-bottom: 0.5rem;
-            transition: color 0.3s ease;
+            font-size: 15px;
+            color: #555;
         }
 
-        .project-description {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 0.8rem;
-            transition: color 0.3s ease;
+        .class-tab:hover {
+            background: #f8f9fa;
+            transform: translateY(-2px);
         }
 
-        .project-tags {
+        .class-tab.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .period-tabs {
             display: flex;
+            gap: 8px;
+            margin-bottom: 25px;
             flex-wrap: wrap;
-            gap: 0.5rem;
         }
 
-        .project-tag {
-            background: rgba(102, 126, 234, 0.1);
-            color: #667eea;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        /* Dark mode adjustments for project tags */
-        #dark-mode-toggle:checked~.page-wrapper .project-tag {
-            background: rgba(159, 122, 234, 0.2);
-            color: #b794f6;
-        }
-
-        #dark-mode-toggle:checked~.page-wrapper .project-card {
-            border-left-color: #9f7aea;
-        }
-
-        /* Contact Form Section */
-        .contact-form-section {
-            padding: 2.5rem 2rem;
-            background: var(--section-bg);
-            transition: background 0.3s ease;
-        }
-
-        .contact-form-section h2 {
-            color: var(--heading-color);
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
-            text-align: center;
-            transition: color 0.3s ease;
-        }
-
-        .contact-form-intro {
-            color: var(--text-secondary);
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 1.05rem;
-        }
-
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-label {
-            display: block;
-            color: var(--text-primary);
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
-        }
-
-        .form-input,
-        .form-textarea {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 2px solid var(--border-color);
+        .period-tab {
+            padding: 10px 20px;
+            border: 2px solid #e0e0e0;
+            background: white;
             border-radius: 8px;
-            font-size: 1rem;
-            font-family: inherit;
-            background: var(--container-bg);
-            color: var(--text-primary);
-            transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 14px;
+            color: #555;
         }
 
-        .form-input:focus,
-        .form-textarea:focus {
+        .period-tab:hover {
+            background: #f8f9fa;
+            transform: translateY(-2px);
+        }
+
+        .period-tab.active {
+            background: #28a745;
+            color: white;
+            border-color: #28a745;
+        }
+
+        .controls {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .control-group {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input[type="date"],
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="date"]:focus,
+        input[type="text"]:focus {
             outline: none;
             border-color: #667eea;
         }
 
-        .form-textarea {
-            min-height: 150px;
-            resize: vertical;
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
         }
 
-        .form-submit {
-            width: 100%;
-            padding: 1rem 2rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .summary-card {
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .summary-card.present {
+            background: #d4edda;
+            border: 2px solid #28a745;
+        }
+
+        .summary-card.absent {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+        }
+
+        .summary-card.late {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+        }
+
+        .summary-label {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .summary-card.present .summary-label {
+            color: #155724;
+        }
+
+        .summary-card.absent .summary-label {
+            color: #721c24;
+        }
+
+        .summary-card.late .summary-label {
+            color: #856404;
+        }
+
+        .summary-count {
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .summary-card.present .summary-count {
+            color: #28a745;
+        }
+
+        .summary-card.absent .summary-count {
+            color: #dc3545;
+        }
+
+        .summary-card.late .summary-count {
+            color: #ffc107;
+        }
+
+        .download-btn {
+            background: #667eea;
             color: white;
             border: none;
+            padding: 12px 24px;
             border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-size: 16px;
             cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+            margin-right: 10px;
         }
 
-        .form-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        .download-btn:hover {
+            background: #5568d3;
         }
 
-        .form-submit:active {
-            transform: translateY(0);
-        }
-
-        /* Form responsive design */
-        @media (max-width: 768px) {
-            .contact-form-section {
-                padding: 2rem 1.5rem;
-            }
-        }
-
-        /* Footer with Contact Links */
-        footer {
-            background: var(--footer-bg);
-            color: var(--footer-text);
-            padding: 2rem;
-            text-align: center;
-            transition: background 0.3s ease, color 0.3s ease;
-        }
-
-        footer h2 {
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .contact-link {
+        .save-btn {
+            background: #28a745;
             color: white;
-            text-decoration: none;
-            font-size: 1rem;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+            margin-right: 10px;
+        }
+
+        .save-btn:hover {
+            background: #218838;
+        }
+
+        .load-btn {
+            background: #17a2b8;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+            margin-right: 10px;
+        }
+
+        .load-btn:hover {
+            background: #138496;
+        }
+
+        .add-student-btn {
+            background: #ffc107;
+            color: #333;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+            font-weight: 600;
+        }
+
+        .add-student-btn:hover {
+            background: #e0a800;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        thead {
+            background: #f8f9fa;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        th:last-child {
+            text-align: center;
+            width: 200px;
+        }
+
+        .actions-cell {
+            text-align: center;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: background 0.3s;
+        }
+
+        .delete-btn:hover {
+            background: #c82333;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .status-buttons {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .status-btn {
+            width: 45px;
+            height: 45px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            transition: color 0.3s ease, transform 0.2s ease;
+            justify-content: center;
+            font-size: 20px;
         }
 
-        .contact-link:hover {
-            color: #667eea;
+        .status-btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        /* Simple icons using CSS */
-        .icon {
-            width: 24px;
-            height: 24px;
-            display: inline-block;
-            position: relative;
+        .status-btn.active-present {
+            background: #28a745;
+            color: white;
+            border-color: #28a745;
         }
 
-        .icon::before {
-            content: '';
-            position: absolute;
+        .status-btn.active-absent {
+            background: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+
+        .status-btn.active-late {
+            background: #ffc107;
+            color: white;
+            border-color: #ffc107;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-size: 16px;
+        }
+
+        .current-info {
+            color: #667eea;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background-size: contain;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* Responsive Design for Mobile */
-        @media (max-width: 768px) {
-            .container {
-                margin: 1rem;
-                border-radius: 8px;
-            }
-
-            header {
-                padding: 2rem 1rem;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .title {
-                font-size: 1rem;
-            }
-
-            .profile-image {
-                width: 120px;
-                height: 120px;
-            }
-
-            .description,
-            .skills {
-                padding: 2rem 1.5rem;
-            }
-
-            .description h2,
-            .skills h2 {
-                font-size: 1.5rem;
-            }
-
-            .skills-category h3 {
-                font-size: 1.1rem;
-            }
-
-            .contact-links {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            footer {
-                padding: 1.5rem;
-            }
-
-            .projects {
-                padding: 2rem 1.5rem;
-            }
-
-            .skill-button {
-                font-size: 0.9rem;
-                padding: 0.5rem 1rem;
-            }
-
-            .project-card {
-                padding: 1rem;
-            }
+        .modal.show {
+            display: flex;
         }
 
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.75rem;
-            }
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
 
-            .description p {
-                font-size: 1rem;
-            }
+        .modal-header {
+            font-size: 22px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
 
-            .badge {
-                font-size: 0.85rem;
-                padding: 0.4rem 0.8rem;
-            }
+        .modal-body {
+            margin-bottom: 20px;
+        }
+
+        .modal-body label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+            font-weight: 600;
+        }
+
+        .modal-body textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .modal-body textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .modal-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-btn-cancel {
+            background: #e0e0e0;
+            color: #555;
+        }
+
+        .modal-btn-cancel:hover {
+            background: #d0d0d0;
+        }
+
+        .modal-btn-confirm {
+            background: #dc3545;
+            color: white;
+        }
+
+        .modal-btn-confirm:hover {
+            background: #c82333;
+        }
+
+        .absence-reason {
+            font-size: 12px;
+            color: #666;
+            font-style: italic;
+            margin-top: 5px;
+        }
+
+        .student-cell {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-body input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+        }
+
+        .modal-body input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        #loadFileInput {
+            display: none;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #c3e6cb;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
         }
     </style>
 </head>
-
 <body>
-    <!-- Hidden checkbox to control dark mode state -->
-    <input type="checkbox" id="dark-mode-toggle">
+    <div class="container">
+        <h1>📚 School Attendance Tracker</h1>
+        
+        <div id="successMessage" class="success-message"></div>
+        
+        <div class="class-tabs" id="classTabs"></div>
+        
+        <div class="period-tabs" id="periodTabs"></div>
+        
+        <div class="current-info" id="currentInfo"></div>
 
-    <!-- Page wrapper for dark mode -->
-    <div class="page-wrapper">
-
-        <!-- Dark Mode Toggle Button -->
-        <div class="theme-toggle">
-            <label for="dark-mode-toggle" class="toggle-label"></label>
+        <div class="controls">
+            <div class="control-group">
+                <label for="date">Date</label>
+                <input type="date" id="date">
+            </div>
+            <div class="control-group">
+                <label for="search">Search Students</label>
+                <input type="text" id="search" placeholder="Search by name...">
+            </div>
         </div>
 
-        <!-- Main Container -->
-        <div class="container">
-
-            <!-- Header with Profile Picture and Name -->
-            <header>
-                <!-- Profile Picture - Replace src with your actual image URL -->
-                <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-image">
-                <h1>John Doe</h1>
-                <p class="title">Full Stack Developer</p>
-            </header>
-
-            <!-- Professional Description Section -->
-            <section class="description">
-                <h2>About Me</h2>
-                <p>
-                    Passionate full stack developer with 5+ years of experience building scalable web applications.
-                    I specialize in modern JavaScript frameworks and cloud technologies, with a strong focus on
-                    creating user-friendly interfaces and robust backend systems. I thrive in collaborative
-                    environments and am always eager to learn new technologies and solve complex problems.
-                </p>
-            </section>
-
-            <!-- Skills Section -->
-            <section class="skills">
-                <h2>Skills</h2>
-
-                <!-- Technical Skills -->
-                <div class="skills-category technical-skills">
-                    <h3>Technical Skills</h3>
-                    <div class="skill-badges">
-                        <span class="badge">JavaScript</span>
-                        <span class="badge">React</span>
-                        <span class="badge">Node.js</span>
-                        <span class="badge">Python</span>
-                        <span class="badge">SQL</span>
-                        <span class="badge">MongoDB</span>
-                        <span class="badge">Git</span>
-                        <span class="badge">Docker</span>
-                        <span class="badge">AWS</span>
-                        <span class="badge">REST APIs</span>
-                        <span class="badge">TypeScript</span>
-                        <span class="badge">CSS/SASS</span>
-                    </div>
-                </div>
-
-                <!-- Soft Skills -->
-                <div class="skills-category soft-skills">
-                    <h3>Soft Skills</h3>
-                    <div class="skill-badges">
-                        <span class="badge">Problem Solving</span>
-                        <span class="badge">Team Collaboration</span>
-                        <span class="badge">Communication</span>
-                        <span class="badge">Adaptability</span>
-                        <span class="badge">Time Management</span>
-                        <span class="badge">Critical Thinking</span>
-                        <span class="badge">Leadership</span>
-                        <span class="badge">Creativity</span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Projects Section with Expandable Skill Dropdowns -->
-            <section class="projects">
-                <h2>Projects</h2>
-                <p class="projects-intro">Click on a skill below to see related projects</p>
-
-                <!-- React Projects -->
-                <div class="skill-project-item">
-                    <input type="checkbox" id="react-projects" class="skill-checkbox">
-                    <label for="react-projects" class="skill-button">React</label>
-
-                    <div class="project-dropdown">
-                        <div class="project-card">
-                            <h3 class="project-title">E-Commerce Platform</h3>
-                            <p class="project-description">
-                                Built a full-featured e-commerce platform with shopping cart, product filtering,
-                                and payment integration. Implemented responsive design and optimized performance
-                                for mobile devices.
-                            </p>
-                            <div class="project-tags">
-                                <span class="project-tag">React</span>
-                                <span class="project-tag">Redux</span>
-                                <span class="project-tag">Stripe API</span>
-                            </div>
-                        </div>
-
-                        <div class="project-card">
-                            <h3 class="project-title">Task Management App</h3>
-                            <p class="project-description">
-                                Collaborative task management tool with real-time updates, drag-and-drop
-                                functionality, and team collaboration features.
-                            </p>
-                            <div class="project-tags">
-                                <span class="project-tag">React</span>
-                                <span class="project-tag">Firebase</span>
-                                <span class="project-tag">Material-UI</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Node.js Projects -->
-                <div class="skill-project-item">
-                    <input type="checkbox" id="nodejs-projects" class="skill-checkbox">
-                    <label for="nodejs-projects" class="skill-button">Node.js</label>
-
-                    <div class="project-dropdown">
-                        <div class="project-card">
-                            <h3 class="project-title">REST API for Social Network</h3>
-                            <p class="project-description">
-                                Designed and implemented a scalable REST API handling user authentication,
-                                posts, comments, and real-time notifications. Serves 10,000+ daily active users.
-                            </p>
-                            <div class="project-tags">
-                                <span class="project-tag">Node.js</span>
-                                <span class="project-tag">Express</span>
-                                <span class="project-tag">MongoDB</span>
-                                <span class="project-tag">JWT</span>
-                            </div>
-                        </div>
-
-                        <div class="project-card">
-                            <h3 class="project-title">Microservices Architecture</h3>
-                            <p class="project-description">
-                                Developed a microservices-based backend system with Docker containerization,
-                                API gateway, and message queue integration.
-                            </p>
-                            <div class="project-tags">
-                                <span class="project-tag">Node.js</span>
-                                <span class="project-tag">Docker</span>
-                                <span class="project-tag">RabbitMQ</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Python Projects -->
-                <div class="skill-project-item">
-                    <input type="checkbox" id="python-projects" class="skill-checkbox">
-                    <label for="python-projects" class="skill-button">Python</label>
-
-                    <div class="project-dropdown">
-                        <div class="project-card">
-                            <h3 class="project-title">Data Analysis Dashboard</h3>
-                            <p class="project-description">
-                                Created an automated data analysis pipeline with interactive visualizations
-                                for business intelligence. Processes and analyzes 1M+ records daily.
-                            </p>
-                            <div class="project-tags">
-                                <span class="project-tag">Python</span>
-                                <span class="project-tag">Pandas</span>
-                                <span class="project-tag">Plotly</span>
-                                <span class="project-tag">PostgreSQL</span>
-                            </div>
-                        </div>
-
-                        <div class="project-card">
-                            <h3 class="project-title">Machine Learning Model</h3>
-                            <p class="project-description">
-                                Developed a predictive model for customer churn analysis with 89% accuracy.
-                                Implemented feature engineering and model optimization techniques.
-                            </p>
-                            <div class="project-tags">
-                                <span class="project-tag">Python</span>
-                                <span class="project-tag">Scikit-learn</span>
-                                <span class="project-tag">TensorFlow</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- AWS Projects -->
-                <div class="skill-project-item">
-                    <input type="checkbox" id="aws-projects" class="skill-checkbox">
-                    <label for="aws-projects" class="skill-button">AWS</label>
-
-                    <div class="project-dropdown">
-                        <div class="project-card">
-                            <h3 class="project-title">Serverless Image Processing</h3>
-                            <p class="project-description">
-                                Built a serverless application for automatic image optimization and resizing
-                                using AWS Lambda, S3, and CloudFront CDN.
-                            </p>
-                            <div class="project-tags">
-                                <span class="project-tag">AWS Lambda</span>
-                                <span class="project-tag">S3</span>
-                                <span class="project-tag">CloudFront</span>
-                                <span class="project-tag">Node.js</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </section>
-
-            <!-- Contact Form Section -->
-            <section class="contact-form-section">
-                <h2>Send Me a Message</h2>
-                <p class="contact-form-intro">Have a project in mind or want to collaborate? Drop me a message!</p>
-
-                <!-- 
-                FormSubmit Contact Form
-                IMPORTANT: Replace "john.doe@example.com" below with YOUR ACTUAL EMAIL ADDRESS
-                For example: john.doe@gmail.com or yourname@outlook.com
-                On first submission, FormSubmit will send you a confirmation email
-            -->
-                <form action="https://formsubmit.co/abdullaalasiri95@gmail.com" method="POST">
-
-
-                    <!-- FormSubmit Configuration (Hidden Fields) -->
-                    <!-- Redirect to a thank you page after submission (optional) -->
-                    <!-- <input type="hidden" name="_next" value="https://yourdomain.com/thanks.html"> -->
-
-                    <!-- Customize the email subject -->
-                    <input type="hidden" name="_subject" value="New submission from CV website!">
-
-                    <!-- Disable CAPTCHA (remove this line if you want CAPTCHA protection) -->
-                    <input type="hidden" name="_captcha" value="false">
-
-                    <!-- Custom confirmation message -->
-                    <input type="hidden" name="_template" value="table">
-
-                    <!-- Name Field -->
-                    <div class="form-group">
-                        <label for="name" class="form-label">Name *</label>
-                        <input type="text" id="name" name="name" class="form-input" placeholder="Your Name" required>
-                    </div>
-
-                    <!-- Email Field -->
-                    <div class="form-group">
-                        <label for="email" class="form-label">Email *</label>
-                        <input type="email" id="email" name="email" class="form-input"
-                            placeholder="your.email@example.com" required>
-                    </div>
-
-                    <!-- Subject Field -->
-                    <div class="form-group">
-                        <label for="subject" class="form-label">Subject</label>
-                        <input type="text" id="subject" name="subject" class="form-input"
-                            placeholder="What's this about?">
-                    </div>
-
-                    <!-- Message Field -->
-                    <div class="form-group">
-                        <label for="message" class="form-label">Message *</label>
-                        <textarea id="message" name="message" class="form-textarea"
-                            placeholder="Tell me about your project or inquiry..." required></textarea>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <button type="submit" class="form-submit">Send Message</button>
-
-                </form>
-            </section>
-
-            <!-- Footer with Contact Information -->
-            <footer>
-                <h2>Get In Touch</h2>
-                <div class="contact-links">
-                    <!-- Email Link -->
-                    <a href="mailto:john.doe@email.com" class="contact-link">
-                        <span class="icon">📧</span>
-                        <span>john.doe@email.com</span>
-                    </a>
-
-                    <!-- LinkedIn Link -->
-                    <a href="https://linkedin.com/in/johndoe" target="_blank" rel="noopener noreferrer"
-                        class="contact-link">
-                        <span class="icon">💼</span>
-                        <span>LinkedIn</span>
-                    </a>
-
-                    <!-- GitHub Link -->
-                    <a href="https://github.com/johndoe" target="_blank" rel="noopener noreferrer" class="contact-link">
-                        <span class="icon">🐙</span>
-                        <span>GitHub</span>
-                    </a>
-                </div>
-            </footer>
-
+        <div class="summary">
+            <div class="summary-card present">
+                <span class="summary-label">Present</span>
+                <span class="summary-count" id="presentCount">0</span>
+            </div>
+            <div class="summary-card absent">
+                <span class="summary-label">Absent</span>
+                <span class="summary-count" id="absentCount">0</span>
+            </div>
+            <div class="summary-card late">
+                <span class="summary-label">Late</span>
+                <span class="summary-count" id="lateCount">0</span>
+            </div>
         </div>
-        <!-- End of container -->
 
+        <div class="button-group">
+            <button class="add-student-btn" onclick="openAddStudentModal()">➕ Add Student</button>
+            <button class="save-btn" onclick="saveData()">💾 Save Data</button>
+            <button class="load-btn" onclick="document.getElementById('loadFileInput').click()">📂 Load Data</button>
+            <button class="download-btn" onclick="downloadReport()">📥 Download Report</button>
+        </div>
+        <input type="file" id="loadFileInput" accept=".json" onchange="loadData(event)">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Roll No.</th>
+                    <th>Student Name</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="studentTable">
+            </tbody>
+        </table>
+        <div id="noResults" class="no-results" style="display: none;">
+            No students found matching your search.
+        </div>
     </div>
-    <!-- End of page-wrapper -->
+
+    <!-- Absence Reason Modal -->
+    <div id="absenceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">Absence Reason</div>
+            <div class="modal-body">
+                <label for="absenceReason">Please enter the reason for <span id="studentName"></span>'s absence:</label>
+                <textarea id="absenceReason" placeholder="e.g., Sick, Doctor's appointment, Family emergency..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-cancel" onclick="closeModal()">Cancel</button>
+                <button class="modal-btn modal-btn-confirm" onclick="confirmAbsence()">Mark Absent</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Student Modal -->
+    <div id="addStudentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">Add New Student</div>
+            <div class="modal-body">
+                <label for="newStudentName">Student Name:</label>
+                <input type="text" id="newStudentName" placeholder="Enter student name...">
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-cancel" onclick="closeAddStudentModal()">Cancel</button>
+                <button class="modal-btn modal-btn-confirm" onclick="confirmAddStudent()">Add Student</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Periods data
+        const periods = [
+            { id: 1, name: 'Period 1', time: '8:00 - 8:45' },
+            { id: 2, name: 'Period 2', time: '8:45 - 9:30' },
+            { id: 3, name: 'Period 3', time: '9:30 - 10:15' },
+            { id: 4, name: 'Period 4', time: '10:15 - 11:00' },
+            { id: 5, name: 'Period 5', time: '11:00 - 11:45' },
+            { id: 6, name: 'Period 6', time: '11:45 - 12:30' },
+            { id: 7, name: 'Period 7', time: '12:30 - 1:15' },
+            { id: 8, name: 'Period 8', time: '1:15 - 2:00' }
+        ];
+
+        // Classes data
+        const classes = [
+            {
+                id: 1,
+                name: 'Class 1A',
+                periods: periods.map(p => ({
+                    ...p,
+                    students: [
+                        { id: 1, name: 'Ahmed Ali', status: 'present', reason: '' },
+                        { id: 2, name: 'Fatima Hassan', status: 'present', reason: '' },
+                        { id: 3, name: 'Mohammed Ibrahim', status: 'present', reason: '' },
+                        { id: 4, name: 'Sara Khalid', status: 'present', reason: '' },
+                        { id: 5, name: 'Omar Abdullah', status: 'present', reason: '' }
+                    ]
+                }))
+            },
+            {
+                id: 2,
+                name: 'Class 2A',
+                periods: periods.map(p => ({
+                    ...p,
+                    students: [
+                        { id: 1, name: 'Layla Mahmoud', status: 'present', reason: '' },
+                        { id: 2, name: 'Yusuf Rashid', status: 'present', reason: '' },
+                        { id: 3, name: 'Amira Zahra', status: 'present', reason: '' },
+                        { id: 4, name: 'Noor Hassan', status: 'present', reason: '' },
+                        { id: 5, name: 'Zain Malik', status: 'present', reason: '' }
+                    ]
+                }))
+            },
+            {
+                id: 3,
+                name: 'Class 3A',
+                periods: periods.map(p => ({
+                    ...p,
+                    students: [
+                        { id: 1, name: 'Huda Ahmed', status: 'present', reason: '' },
+                        { id: 2, name: 'Tariq Omar', status: 'present', reason: '' },
+                        { id: 3, name: 'Maryam Saleh', status: 'present', reason: '' },
+                        { id: 4, name: 'Karim Youssef', status: 'present', reason: '' },
+                        { id: 5, name: 'Aya Mustafa', status: 'present', reason: '' }
+                    ]
+                }))
+            },
+            {
+                id: 4,
+                name: 'Class 4A',
+                periods: periods.map(p => ({
+                    ...p,
+                    students: [
+                        { id: 1, name: 'Rania Kamal', status: 'present', reason: '' },
+                        { id: 2, name: 'Hamza Faisal', status: 'present', reason: '' },
+                        { id: 3, name: 'Leila Nasser', status: 'present', reason: '' },
+                        { id: 4, name: 'Bilal Jamal', status: 'present', reason: '' },
+                        { id: 5, name: 'Sana Tariq', status: 'present', reason: '' }
+                    ]
+                }))
+            },
+            {
+                id: 5,
+                name: 'Class 5A',
+                periods: periods.map(p => ({
+                    ...p,
+                    students: [
+                        { id: 1, name: 'Nadeen Waleed', status: 'present', reason: '' },
+                        { id: 2, name: 'Rashid Samir', status: 'present', reason: '' },
+                        { id: 3, name: 'Dina Fouad', status: 'present', reason: '' },
+                        { id: 4, name: 'Majid Hussain', status: 'present', reason: '' },
+                        { id: 5, name: 'Yasmin Adel', status: 'present', reason: '' }
+                    ]
+                }))
+            },
+            {
+                id: 6,
+                name: 'Class 6A',
+                periods: periods.map(p => ({
+                    ...p,
+                    students: [
+                        { id: 1, name: 'Salma Osama', status: 'present', reason: '' },
+                        { id: 2, name: 'Fares Amjad', status: 'present', reason: '' },
+                        { id: 3, name: 'Reem Hisham', status: 'present', reason: '' },
+                        { id: 4, name: 'Adel Maher', status: 'present', reason: '' },
+                        { id: 5, name: 'Noura Tarek', status: 'present', reason: '' }
+                    ]
+                }))
+            },
+            {
+                id: 7,
+                name: 'Class 7A',
+                periods: periods.map(p => ({
+                    ...p,
+                    students: [
+                        { id: 1, name: 'Imad Khaled', status: 'present', reason: '' },
+                        { id: 2, name: 'Jana Rami', status: 'present', reason: '' },
+                        { id: 3, name: 'Seif Ayman', status: 'present', reason: '' },
+                        { id: 4, name: 'Malak Fady', status: 'present', reason: '' },
+                        { id: 5, name: 'Yousef Sherif', status: 'present', reason: '' }
+                    ]
+                }))
+            },
+            {
+                id: 8,
+                name: 'Class 8A',
+                periods: periods.map(p => ({
+                    ...p,
+                    students: [
+                        { id: 1, name: 'Lina Bassam', status: 'present', reason: '' },
+                        { id: 2, name: 'Nabil Samer', status: 'present', reason: '' },
+                        { id: 3, name: 'Hana Ziad', status: 'present', reason: '' },
+                        { id: 4, name: 'Tamer Essam', status: 'present', reason: '' },
+                        { id: 5, name: 'Maya Hany', status: 'present', reason: '' }
+                    ]
+                }))
+            }
+        ];
+
+        let currentClassId = 1;
+        let currentPeriodId = 1;
+        let pendingAbsenceStudentId = null;
+
+        // Set today's date
+        document.getElementById('date').valueAsDate = new Date();
+
+        // Render class tabs
+        function renderClassTabs() {
+            const tabsContainer = document.getElementById('classTabs');
+            tabsContainer.innerHTML = classes.map(cls => `
+                <button class="class-tab ${cls.id === currentClassId ? 'active' : ''}" 
+                        onclick="switchClass(${cls.id})">
+                    ${cls.name}
+                </button>
+            `).join('');
+        }
+
+        // Render period tabs
+        function renderPeriodTabs() {
+            const tabsContainer = document.getElementById('periodTabs');
+            tabsContainer.innerHTML = periods.map(period => `
+                <button class="period-tab ${period.id === currentPeriodId ? 'active' : ''}" 
+                        onclick="switchPeriod(${period.id})"
+                        title="${period.time}">
+                    ${period.name}
+                </button>
+            `).join('');
+        }
+
+        // Switch to different class
+        function switchClass(classId) {
+            currentClassId = classId;
+            document.getElementById('search').value = '';
+            renderClassTabs();
+            renderTable();
+        }
+
+        // Switch to different period
+        function switchPeriod(periodId) {
+            currentPeriodId = periodId;
+            document.getElementById('search').value = '';
+            renderPeriodTabs();
+            renderTable();
+        }
+
+        // Get current class
+        function getCurrentClass() {
+            return classes.find(c => c.id === currentClassId);
+        }
+
+        // Get current period
+        function getCurrentPeriod() {
+            const currentClass = getCurrentClass();
+            return currentClass.periods.find(p => p.id === currentPeriodId);
+        }
+
+        // Initialize the table
+        function renderTable() {
+            const currentClass = getCurrentClass();
+            const currentPeriod = getCurrentPeriod();
+            const searchTerm = document.getElementById('search').value.toLowerCase();
+            
+            // Sort students alphabetically by name
+            const sortedStudents = [...currentPeriod.students].sort((a, b) => 
+                a.name.localeCompare(b.name)
+            );
+            
+            const filteredStudents = sortedStudents.filter(student => 
+                student.name.toLowerCase().includes(searchTerm)
+            );
+
+            document.getElementById('currentInfo').textContent = 
+                `📖 ${currentClass.name} - ${currentPeriod.name} (${currentPeriod.time})`;
+
+            const tbody = document.getElementById('studentTable');
+            const noResults = document.getElementById('noResults');
+            
+            if (filteredStudents.length === 0) {
+                tbody.innerHTML = '';
+                noResults.style.display = 'block';
+                return;
+            }
+            
+            noResults.style.display = 'none';
+            tbody.innerHTML = filteredStudents.map((student, index) => `
+                <tr>
+                    <td><strong>${index + 1}</strong></td>
+                    <td>
+                        <div class="student-cell">
+                            <span>${student.name}</span>
+                            ${student.status === 'absent' && student.reason ? `<span class="absence-reason">Reason: ${student.reason}</span>` : ''}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="status-buttons">
+                            <button class="status-btn ${student.status === 'present' ? 'active-present' : ''}" 
+                                    onclick="setStatus(${student.id}, 'present')" 
+                                    title="Present">
+                                ✓
+                            </button>
+                            <button class="status-btn ${student.status === 'late' ? 'active-late' : ''}" 
+                                    onclick="setStatus(${student.id}, 'late')" 
+                                    title="Late">
+                                🕐
+                            </button>
+                            <button class="status-btn ${student.status === 'absent' ? 'active-absent' : ''}" 
+                                    onclick="openAbsenceModal(${student.id})" 
+                                    title="Absent">
+                                ✗
+                            </button>
+                        </div>
+                    </td>
+                    <td class="actions-cell">
+                        <button class="delete-btn" onclick="deleteStudent(${student.id})">🗑️ Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+
+            updateSummary();
+        }
+
+        // Open absence modal
+        function openAbsenceModal(studentId) {
+            const currentPeriod = getCurrentPeriod();
+            const student = currentPeriod.students.find(s => s.id === studentId);
+            if (student) {
+                pendingAbsenceStudentId = studentId;
+                document.getElementById('studentName').textContent = student.name;
+                document.getElementById('absenceReason').value = student.reason || '';
+                document.getElementById('absenceModal').classList.add('show');
+            }
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('absenceModal').classList.remove('show');
+            document.getElementById('absenceReason').value = '';
+            pendingAbsenceStudentId = null;
+        }
+
+        // Confirm absence
+        function confirmAbsence() {
+            const reason = document.getElementById('absenceReason').value.trim();
+            if (pendingAbsenceStudentId !== null) {
+                const currentPeriod = getCurrentPeriod();
+                const student = currentPeriod.students.find(s => s.id === pendingAbsenceStudentId);
+                if (student) {
+                    student.status = 'absent';
+                    student.reason = reason;
+                    renderTable();
+                }
+            }
+            closeModal();
+        }
+
+        // Set student status
+        function setStatus(id, status) {
+            const currentPeriod = getCurrentPeriod();
+            const student = currentPeriod.students.find(s => s.id === id);
+            if (student) {
+                student.status = status;
+                if (status !== 'absent') {
+                    student.reason = '';
+                }
+                renderTable();
+            }
+        }
+
+        // Update summary counts
+        function updateSummary() {
+            const currentPeriod = getCurrentPeriod();
+            const present = currentPeriod.students.filter(s => s.status === 'present').length;
+            const absent = currentPeriod.students.filter(s => s.status === 'absent').length;
+            const late = currentPeriod.students.filter(s => s.status === 'late').length;
+
+            document.getElementById('presentCount').textContent = present;
+            document.getElementById('absentCount').textContent = absent;
+            document.getElementById('lateCount').textContent = late;
+        }
+
+        // Download report
+        function downloadReport() {
+            const date = document.getElementById('date').value;
+            const currentClass = getCurrentClass();
+            
+            let report = `ATTENDANCE REPORT\n`;
+            report += `Class: ${currentClass.name}\n`;
+            report += `Date: ${date}\n`;
+            report += `${'='.repeat(70)}\n\n`;
+
+            currentClass.periods.forEach(period => {
+                const present = period.students.filter(s => s.status === 'present').length;
+                const absent = period.students.filter(s => s.status === 'absent').length;
+                const late = period.students.filter(s => s.status === 'late').length;
+
+                // Sort students alphabetically
+                const sortedStudents = [...period.students].sort((a, b) => 
+                    a.name.localeCompare(b.name)
+                );
+
+                report += `${period.name} (${period.time})\n`;
+                report += `-`.repeat(70) + `\n`;
+                report += `Present: ${present} | Absent: ${absent} | Late: ${late} | Total: ${period.students.length}\n\n`;
+                
+                sortedStudents.forEach((student, index) => {
+                    report += `  ${(index + 1).toString().padStart(2, '0')}. ${student.name.padEnd(28)} ${student.status.toUpperCase()}`;
+                    if (student.status === 'absent' && student.reason) {
+                        report += ` - ${student.reason}`;
+                    }
+                    report += `\n`;
+                });
+                report += `\n`;
+            });
+
+            const blob = new Blob([report], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `attendance-${currentClass.name}-${date}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Search functionality
+        document.getElementById('search').addEventListener('input', renderTable);
+
+        // Close modal when clicking outside
+        document.getElementById('absenceModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        document.getElementById('addStudentModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAddStudentModal();
+            }
+        });
+
+        // Add Student Functions
+        function openAddStudentModal() {
+            document.getElementById('newStudentName').value = '';
+            document.getElementById('addStudentModal').classList.add('show');
+        }
+
+        function closeAddStudentModal() {
+            document.getElementById('addStudentModal').classList.remove('show');
+            document.getElementById('newStudentName').value = '';
+        }
+
+        function confirmAddStudent() {
+            const studentName = document.getElementById('newStudentName').value.trim();
+            if (!studentName) {
+                alert('Please enter a student name');
+                return;
+            }
+
+            const currentClass = getCurrentClass();
+            
+            // Find the highest student ID across all periods
+            let maxId = 0;
+            currentClass.periods.forEach(period => {
+                period.students.forEach(student => {
+                    if (student.id > maxId) maxId = student.id;
+                });
+            });
+            
+            const newId = maxId + 1;
+            
+            // Add student to all periods of the current class
+            currentClass.periods.forEach(period => {
+                period.students.push({
+                    id: newId,
+                    name: studentName,
+                    status: 'present',
+                    reason: ''
+                });
+            });
+
+            closeAddStudentModal();
+            renderTable();
+            showSuccessMessage(`Student "${studentName}" added successfully to all periods!`);
+        }
+
+        function deleteStudent(studentId) {
+            if (!confirm('Are you sure you want to delete this student from all periods?')) {
+                return;
+            }
+
+            const currentClass = getCurrentClass();
+            
+            // Remove student from all periods
+            currentClass.periods.forEach(period => {
+                period.students = period.students.filter(s => s.id !== studentId);
+            });
+
+            renderTable();
+            showSuccessMessage('Student deleted successfully from all periods!');
+        }
+
+        // Save and Load Functions
+        function saveData() {
+            const data = {
+                classes: classes,
+                date: document.getElementById('date').value,
+                savedAt: new Date().toISOString()
+            };
+
+            const dataStr = JSON.stringify(data, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `attendance-data-${data.date}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showSuccessMessage('Data saved successfully! File downloaded.');
+        }
+
+        function loadData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    
+                    // Restore classes data
+                    classes.length = 0;
+                    data.classes.forEach(cls => classes.push(cls));
+                    
+                    // Restore date
+                    document.getElementById('date').value = data.date;
+                    
+                    // Re-render everything
+                    renderClassTabs();
+                    renderPeriodTabs();
+                    renderTable();
+                    
+                    showSuccessMessage('Data loaded successfully!');
+                } catch (error) {
+                    alert('Error loading data file. Please make sure it is a valid attendance data file.');
+                    console.error(error);
+                }
+            };
+            reader.readAsText(file);
+            
+            // Reset file input
+            event.target.value = '';
+        }
+
+        function showSuccessMessage(message) {
+            const msgDiv = document.getElementById('successMessage');
+            msgDiv.textContent = message;
+            msgDiv.classList.add('show');
+            
+            setTimeout(() => {
+                msgDiv.classList.remove('show');
+            }, 3000);
+        }
+
+        // Initial render
+        renderClassTabs();
+        renderPeriodTabs();
+        renderTable();
+    </script>
 </body>
-
-
 </html>
-
